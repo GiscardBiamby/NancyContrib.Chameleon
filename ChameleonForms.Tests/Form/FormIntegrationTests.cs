@@ -1,24 +1,25 @@
 ﻿using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
-using ChameleonForms.Tests.FieldGenerator;
-using ChameleonForms.Tests.Helpers;
+using NancyContrib.Chameleon.Tests.FieldGenerator;
+using NancyContrib.Chameleon.Tests.Helpers;
 using NUnit.Framework;
-using ChameleonForms.Component;
+using NancyContrib.Chameleon.Component;
+using Nancy.ViewEngines.Razor;
 
-namespace ChameleonForms.Tests.Form
+namespace NancyContrib.Chameleon.Tests.Form
 {
     [TestFixture]
     [UseReporter(typeof(DiffReporter))]
     class IntegratedFormShould
     {
-        private HtmlHelper<TestFieldViewModel> _h;
+        private HtmlHelpers<TestFieldViewModel> _h;
 
         [SetUp]
         public void Setup()
         {
             var autoSubstitute = AutoSubstituteContainer.Create();
-            _h = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            _h = autoSubstitute.Resolve<HtmlHelpers<TestFieldViewModel>>();
         }
 
         [Test]

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Templates;
 
-namespace ChameleonForms.Component
+namespace NancyContrib.Chameleon.Component
 {
     /// <summary>
     /// Chameleon Forms component - holds a reference to a form.
@@ -21,7 +21,7 @@ namespace ChameleonForms.Component
     /// Chameleon Forms base component class; provides an ability to easily write HTML to the page in a self-closing or nested manner.
     /// Ensure you call Initialise() at the end of the constructor when extending this class.
     /// </summary>
-    public abstract class FormComponent<TModel, TTemplate> : IFormComponent<TModel, TTemplate>, IHtmlString, IDisposable where TTemplate : IFormTemplate
+    public abstract class FormComponent<TModel, TTemplate> : IFormComponent<TModel, TTemplate>,   Nancy.ViewEngines.Razor.IHtmlString, IDisposable where TTemplate : IFormTemplate
     {
         protected readonly bool IsSelfClosing;
         public IForm<TModel, TTemplate> Form { get; private set; }
@@ -46,13 +46,13 @@ namespace ChameleonForms.Component
         /// Returns the HTML representation of the beginning of the form component.
         /// </summary>
         /// <returns>The beginning HTML for the form component</returns>
-        public abstract IHtmlString Begin();
+        public abstract    Nancy.ViewEngines.Razor.IHtmlString Begin();
 
         /// <summary>
         /// Returns the HTML representation of the end of the form component.
         /// </summary>
         /// <returns>The ending HTML for the form component</returns>
-        public abstract IHtmlString End();
+        public abstract    Nancy.ViewEngines.Razor.IHtmlString End();
 
         public string ToHtmlString()
         {

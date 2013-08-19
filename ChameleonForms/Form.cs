@@ -1,13 +1,26 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web;
-using System.Web.Mvc;
-using ChameleonForms.Enums;
-using ChameleonForms.FieldGenerators;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Enums;
+using NancyContrib.Chameleon.FieldGenerators;
+using NancyContrib.Chameleon.Templates;
+using Nancy;
+using Nancy.ViewEngines;
+using Nancy.ViewEngines.Razor; 
 
-namespace ChameleonForms
+namespace NancyContrib.Chameleon
 {
+    /// <summary>
+    /// TODO: GB
+    /// </summary>
+    public enum FormMethod { Get, Post }
+
+    public static class FormMethodExtensions {
+        public static string GetFormMethodString(this FormMethod method) {
+            return method == FormMethod.Get ? "GET" : "POST";
+        }
+    }
+
     /// <summary>
     /// Interface for a Chameleon Form.
     /// </summary>
@@ -18,7 +31,7 @@ namespace ChameleonForms
         /// <summary>
         /// The HTML helper for the current view.
         /// </summary>
-        HtmlHelper<TModel> HtmlHelper { get; }
+        HtmlHelpers<TModel> HtmlHelper { get; }
         /// <summary>
         /// The template renderer for the current view.
         /// </summary>
@@ -27,7 +40,7 @@ namespace ChameleonForms
         /// Writes a HTML String directly to the view's output.
         /// </summary>
         /// <param name="htmlString">The HTML to write to the view's output</param>
-        void Write(IHtmlString htmlString);
+        void Write(   Nancy.ViewEngines.Razor.IHtmlString htmlString);
 
         /// <summary>
         /// The field generator for the given field.
@@ -41,7 +54,7 @@ namespace ChameleonForms
     /// </summary>
     public class Form<TModel, TTemplate> : IForm<TModel, TTemplate> where TTemplate : IFormTemplate
     {
-        public HtmlHelper<TModel> HtmlHelper { get; private set; }
+        public HtmlHelpers<TModel> HtmlHelper { get; private set; }
         public TTemplate Template { get; private set; }
 
         /// <summary>
@@ -54,7 +67,7 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use expressed as an anonymous object</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
-        public Form(HtmlHelper<TModel> helper, TTemplate template, string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        public Form(HtmlHelpers<TModel> helper, TTemplate template, string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
         {
             HtmlHelper = helper;
             Template = template;
@@ -64,7 +77,7 @@ namespace ChameleonForms
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
 
-        public virtual void Write(IHtmlString htmlString)
+        public virtual void Write(   Nancy.ViewEngines.Razor.IHtmlString htmlString)
         {
             HtmlHelper.ViewContext.Writer.Write(htmlString);
         }
@@ -100,7 +113,7 @@ namespace ChameleonForms
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
         /// <returns>A <see cref="Form{TModel,TTemplate}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelpers<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             return new Form<TModel, DefaultFormTemplate>(helper, new DefaultFormTemplate(), action, method, htmlAttributes, enctype);
         }

@@ -1,7 +1,7 @@
-﻿using ChameleonForms.Example.Controllers;
+﻿using NancyContrib.Chameleon.Example.Controllers;
 using OpenQA.Selenium;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
+namespace NancyContrib.Chameleon.AcceptanceTests.ModelBinding.Pages
 {
     public class ModelBindingExamplePage : ChameleonFormsPage<ModelBindingViewModel>
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Web;
-using ChameleonForms.Enums;
+using NancyContrib.Chameleon.Enums;
 
-namespace ChameleonForms.Component.Config
+namespace NancyContrib.Chameleon.Component.Config
 {
     /// <summary>
     /// Immutable field configuration for use when generating a field's HTML.
@@ -23,12 +23,12 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// Gets any text that has been set for an inline label.
         /// </summary>
-        IHtmlString InlineLabelText { get; }
+         Nancy.ViewEngines.Razor.IHtmlString InlineLabelText { get; }
 
         /// <summary>
         /// Gets any text that has been set for the label.
         /// </summary>
-        IHtmlString LabelText { get; }
+         Nancy.ViewEngines.Razor.IHtmlString LabelText { get; }
 
         /// <summary>
         /// Returns the display type for the field.
@@ -53,22 +53,22 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// Get the hint to display with the field.
         /// </summary>
-        IHtmlString Hint { get; }
+         Nancy.ViewEngines.Razor.IHtmlString Hint { get; }
 
         /// <summary>
         /// A list of HTML to be prepended to the form field in ltr order.
         /// </summary>
-        IEnumerable<IHtmlString> PrependedHtml { get; }
+        IEnumerable<Nancy.ViewEngines.Razor.IHtmlString> PrependedHtml { get; }
 
         /// <summary>
         /// A list of HTML to be appended to the form field in ltr order.
         /// </summary>
-        IEnumerable<IHtmlString> AppendedHtml { get; }
+        IEnumerable<Nancy.ViewEngines.Razor.IHtmlString> AppendedHtml { get; }
 
         /// <summary>
         /// The HTML to be used as the field html.
         /// </summary>
-        IHtmlString FieldHtml { get; }
+         Nancy.ViewEngines.Razor.IHtmlString FieldHtml { get; }
 
         /// <summary>
         /// The format string to use for the field.
@@ -112,12 +112,12 @@ namespace ChameleonForms.Component.Config
             get { return _fieldConfiguration.Attributes.ToDictionary(); }
         }
 
-        public IHtmlString InlineLabelText
+        public Nancy.ViewEngines.Razor.IHtmlString InlineLabelText
         {
             get { return _fieldConfiguration.InlineLabelText; }
         }
 
-        public IHtmlString LabelText
+        public Nancy.ViewEngines.Razor.IHtmlString LabelText
         {
             get { return _fieldConfiguration.LabelText; }
         }
@@ -142,22 +142,22 @@ namespace ChameleonForms.Component.Config
             get { return _fieldConfiguration.NoneString; }
         }
 
-        public IHtmlString Hint
+        public Nancy.ViewEngines.Razor.IHtmlString Hint
         {
             get { return _fieldConfiguration.Hint; }
         }
 
-        public IEnumerable<IHtmlString> PrependedHtml
+        public IEnumerable<Nancy.ViewEngines.Razor.IHtmlString> PrependedHtml
         {
             get { return _fieldConfiguration.PrependedHtml; }
         }
 
-        public IEnumerable<IHtmlString> AppendedHtml
+        public IEnumerable<Nancy.ViewEngines.Razor.IHtmlString> AppendedHtml
         {
             get { return _fieldConfiguration.AppendedHtml; }
         }
 
-        public IHtmlString FieldHtml
+        public Nancy.ViewEngines.Razor.IHtmlString FieldHtml
         {
             get { return _fieldConfiguration.FieldHtml; }
         }

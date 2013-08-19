@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Threading;
 
-namespace ChameleonForms.Tests.Helpers
+namespace NancyContrib.Chameleon.Tests.Helpers
 {
     public class ChangeCulture : IDisposable
     {

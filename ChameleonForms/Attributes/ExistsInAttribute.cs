@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace ChameleonForms.Attributes
+namespace NancyContrib.Chameleon.Attributes
 {
     /// <summary>
     /// Indicates that the attributed property value should exist within the list property referenced by the attribute.

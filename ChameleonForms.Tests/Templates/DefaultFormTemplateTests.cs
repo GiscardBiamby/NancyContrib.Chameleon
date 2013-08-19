@@ -2,12 +2,12 @@
 using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Enums;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Enums;
+using NancyContrib.Chameleon.Templates;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Templates
+namespace NancyContrib.Chameleon.Tests.Templates
 {
     [TestFixture]
     [UseReporter(typeof(DiffReporter))]

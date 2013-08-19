@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ChameleonForms.Enums
+namespace NancyContrib.Chameleon.Enums
 {
     ///<summary>
     /// Representation of the different form encoding types.

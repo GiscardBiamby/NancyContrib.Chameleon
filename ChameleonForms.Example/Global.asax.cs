@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Routing;
-using ChameleonForms.ModelBinders;
+using NancyContrib.Chameleon.ModelBinders;
 
-namespace ChameleonForms.Example
+namespace NancyContrib.Chameleon.Example
 {
     public class MvcApplication : System.Web.HttpApplication
     {

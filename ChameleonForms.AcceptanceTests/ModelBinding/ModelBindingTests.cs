@@ -1,9 +1,9 @@
-﻿using ChameleonForms.AcceptanceTests.Helpers;
-using ChameleonForms.AcceptanceTests.ModelBinding.Pages;
+﻿using NancyContrib.Chameleon.AcceptanceTests.Helpers;
+using NancyContrib.Chameleon.AcceptanceTests.ModelBinding.Pages;
 using NUnit.Framework;
 using TestStack.Seleno.Configuration;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding
+namespace NancyContrib.Chameleon.AcceptanceTests.ModelBinding
 {
     [TestFixture]
     class ModelBindingShould

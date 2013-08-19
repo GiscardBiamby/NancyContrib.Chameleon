@@ -2,11 +2,12 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Enums;
-using ChameleonForms.Templates;
+using Nancy.ViewEngines.Razor;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Enums;
+using NancyContrib.Chameleon.Templates;
 
-namespace ChameleonForms.FieldGenerators.Handlers
+namespace NancyContrib.Chameleon.FieldGenerators.Handlers
 {
     internal class BooleanHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
@@ -19,7 +20,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return GetUnderlyingType() == typeof(bool);
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override Nancy.ViewEngines.Razor.IHtmlString GenerateFieldHtml()
         {
             if (FieldConfiguration.DisplayType == FieldDisplayType.Default && FieldGenerator.Metadata.ModelType == typeof(bool))
                 return GetSingleCheckboxHtml();
@@ -33,18 +34,18 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldGenerator.GetValue() as bool?;
         }
 
-        private IHtmlString GetSingleCheckboxHtml()
+        private Nancy.ViewEngines.Razor.IHtmlString GetSingleCheckboxHtml()
         {
             var attrs = new HtmlAttributes(FieldConfiguration.HtmlAttributes);
             AdjustHtmlForModelState(attrs);
             var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue() ?? false, attrs);
             var labelHtml = HtmlCreator.BuildLabel(
                 GetFieldName(),
-                FieldConfiguration.InlineLabelText ?? new HtmlString(FieldGenerator.GetFieldDisplayName()),
+                FieldConfiguration.InlineLabelText ?? new NonEncodedHtmlString(FieldGenerator.GetFieldDisplayName()),
                 null
             );
 
-            return new HtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
+            return new NonEncodedHtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
         }
 
         private IEnumerable<SelectListItem> GetBooleanSelectList()

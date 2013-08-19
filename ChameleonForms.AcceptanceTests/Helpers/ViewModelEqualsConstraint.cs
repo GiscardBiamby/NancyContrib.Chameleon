@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Linq;
 using System.Reflection;
-using ChameleonForms.AcceptanceTests.ModelBinding.Pages;
-using ChameleonForms.Example.Controllers;
+using NancyContrib.Chameleon.AcceptanceTests.ModelBinding.Pages;
+using NancyContrib.Chameleon.Example.Controllers;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace ChameleonForms.AcceptanceTests.Helpers
+namespace NancyContrib.Chameleon.AcceptanceTests.Helpers
 {
     public static class IsSame
     {

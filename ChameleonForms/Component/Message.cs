@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Web;
-using ChameleonForms.Enums;
-using ChameleonForms.Templates;
+using Nancy.ViewEngines.Razor;
+using NancyContrib.Chameleon.Enums;
+using NancyContrib.Chameleon.Templates;
 
-namespace ChameleonForms.Component
+namespace NancyContrib.Chameleon.Component
 {
     /// <summary>
     /// Wraps the output of a message to display to a user.
@@ -13,7 +14,7 @@ namespace ChameleonForms.Component
     public class Message<TModel, TTemplate> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
     {
         private readonly MessageType _messageType;
-        private readonly IHtmlString _heading;
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _heading;
 
         /// <summary>
         /// Creates a message.
@@ -21,19 +22,19 @@ namespace ChameleonForms.Component
         /// <param name="form">The form the message is being created in</param>
         /// <param name="messageType">The type of message to display</param>
         /// <param name="heading">The heading for the message</param>
-        public Message(IForm<TModel, TTemplate> form, MessageType messageType, IHtmlString heading) : base(form, false)
+        public Message(IForm<TModel, TTemplate> form, MessageType messageType,  Nancy.ViewEngines.Razor.IHtmlString heading) : base(form, false)
         {
             _messageType = messageType;
             _heading = heading;
             Initialise();
         }
 
-        public override IHtmlString Begin()
+        public override Nancy.ViewEngines.Razor.IHtmlString Begin()
         {
             return Form.Template.BeginMessage(_messageType, _heading);
         }
 
-        public override IHtmlString End()
+        public override Nancy.ViewEngines.Razor.IHtmlString End()
         {
             return Form.Template.EndMessage();
         }
@@ -43,9 +44,9 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="paragraph">The paragraph to output</param>
         /// <returns>The HTML for the paragraph</returns>
-        public virtual IHtmlString Paragraph(string paragraph)
+        public virtual Nancy.ViewEngines.Razor.IHtmlString Paragraph(string paragraph)
         {
-            return Form.Template.MessageParagraph(new HtmlString(HttpUtility.HtmlEncode(paragraph)));
+            return Form.Template.MessageParagraph(new NonEncodedHtmlString(HttpUtility.HtmlEncode(paragraph)));
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="paragraph">The paragraph to output</param>
         /// <returns>The HTML for the paragraph</returns>
-        public virtual IHtmlString Paragraph(IHtmlString paragraph)
+        public virtual Nancy.ViewEngines.Razor.IHtmlString Paragraph(Nancy.ViewEngines.Razor.IHtmlString paragraph)
         {
             return Form.Template.MessageParagraph(paragraph);
         }
@@ -80,7 +81,7 @@ namespace ChameleonForms.Component
         /// <returns>The message</returns>
         public static Message<TModel, TTemplate> BeginMessage<TModel, TTemplate>(this IForm<TModel, TTemplate> form, MessageType messageType, string heading) where TTemplate : IFormTemplate
         {
-            return new Message<TModel, TTemplate>(form, messageType, new HtmlString(HttpUtility.HtmlEncode(heading)));
+            return new Message<TModel, TTemplate>(form, messageType, new NonEncodedHtmlString(HttpUtility.HtmlEncode(heading)));
         }
     }
 }

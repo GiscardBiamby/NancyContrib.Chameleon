@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using System.Web;
-using ChameleonForms.Component.Config;
+using NancyContrib.Chameleon.Component.Config;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Component.Config
+namespace NancyContrib.Chameleon.Tests.Component.Config
 {
     class ReadonlyFieldConfigurationShould
     {

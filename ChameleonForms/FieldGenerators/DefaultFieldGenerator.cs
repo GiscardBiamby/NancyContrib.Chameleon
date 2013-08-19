@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Templates;
+using Nancy.ViewEngines.Razor;
 using System.Web.Mvc;
-using System.Web.Mvc.Html;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Templates;
 
-namespace ChameleonForms.FieldGenerators
+namespace NancyContrib.Chameleon.FieldGenerators
 {
     /// <summary>
     /// The default field HTML generator.
@@ -21,7 +21,7 @@ namespace ChameleonForms.FieldGenerators
         /// </summary>
         /// <param name="htmlHelper">The HTML helper for the current view</param>
         /// <param name="fieldProperty">Expression to identify the property to generate the field for</param>
-        public DefaultFieldGenerator(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, T>> fieldProperty)
+        public DefaultFieldGenerator(HtmlHelpers<TModel> htmlHelper, Expression<Func<TModel, T>> fieldProperty)
         {
             HtmlHelper = htmlHelper;
             FieldProperty = fieldProperty;
@@ -29,10 +29,10 @@ namespace ChameleonForms.FieldGenerators
         }
 
         public ModelMetadata Metadata { get; private set; }
-        public HtmlHelper<TModel> HtmlHelper { get; private set; }
+        public HtmlHelpers<TModel> HtmlHelper { get; private set; }
         public Expression<Func<TModel, T>> FieldProperty { get; private set; }
 
-        public IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public Nancy.ViewEngines.Razor.IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             string @for;
             if (fieldConfiguration != null && fieldConfiguration.HtmlAttributes.ContainsKey("id"))
@@ -46,7 +46,7 @@ namespace ChameleonForms.FieldGenerators
             }
 
             var labelText = (fieldConfiguration == null ? null : fieldConfiguration.LabelText)
-                ?? new HtmlString(GetFieldDisplayName());
+                ?? new NonEncodedHtmlString(GetFieldDisplayName());
 
             if (fieldConfiguration != null && !fieldConfiguration.HasLabel)
                 return labelText;
@@ -61,22 +61,22 @@ namespace ChameleonForms.FieldGenerators
                 ?? ExpressionHelper.GetExpressionText(FieldProperty).Split('.').Last();
         }
 
-        public IHtmlString GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public Nancy.ViewEngines.Razor.IHtmlString GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return HtmlHelper.ValidationMessageFor(FieldProperty);
         }
 
-        public IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration)
+        public    Nancy.ViewEngines.Razor.IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration)
         {
             return GetFieldHtml(PrepareFieldConfiguration(fieldConfiguration));
         }
 
-        public IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
+        public    Nancy.ViewEngines.Razor.IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
         {
             return GetLabelHtml(PrepareFieldConfiguration(fieldConfiguration));
         }
 
-        public IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)
+        public    Nancy.ViewEngines.Razor.IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)
         {
             return GetValidationHtml(PrepareFieldConfiguration(fieldConfiguration));
         }
@@ -94,7 +94,7 @@ namespace ChameleonForms.FieldGenerators
             return new ReadonlyFieldConfiguration(fieldConfiguration);
         }
 
-        public IHtmlString GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public    Nancy.ViewEngines.Razor.IHtmlString GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             fieldConfiguration = fieldConfiguration ?? new ReadonlyFieldConfiguration(new FieldConfiguration());
             if (fieldConfiguration.FieldHtml != null)

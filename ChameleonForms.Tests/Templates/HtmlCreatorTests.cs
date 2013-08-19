@@ -1,10 +1,10 @@
 ﻿using System.Web;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Templates;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Templates
+namespace NancyContrib.Chameleon.Tests.Templates
 {
     [TestFixture]
     [UseReporter(typeof(DiffReporter))]

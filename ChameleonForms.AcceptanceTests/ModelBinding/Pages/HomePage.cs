@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using TestStack.Seleno.PageObjects;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
+namespace NancyContrib.Chameleon.AcceptanceTests.ModelBinding.Pages
 {
     public class HomePage : Page
     {

@@ -1,30 +1,30 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using ChameleonForms.Component;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Component;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Templates;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Component
+namespace NancyContrib.Chameleon.Tests.Component
 {
     [TestFixture]
     public class SectionShould
     {
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
-        private readonly IHtmlString _nestedBeginHtml = new HtmlString("");
-        private readonly IHtmlString _nestedEndHtml = new HtmlString("");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _beginHtml = new HtmlString("");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _endHtml = new HtmlString("");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _nestedBeginHtml = new HtmlString("");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _nestedEndHtml = new HtmlString("");
         private IForm<object, IFormTemplate> _f;
-        private readonly IHtmlString _title = new HtmlString("title");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _title = new HtmlString("title");
 
         [SetUp]
         public void Setup()
         {
             _f = Substitute.For<IForm<object, IFormTemplate>>();
-            _f.Template.BeginSection(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _title.ToHtmlString()), Arg.Any<IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_beginHtml);
+            _f.Template.BeginSection(Arg.Is Nancy.ViewEngines.Razor.IHtmlString>(h => h.ToHtmlString() == _title.ToHtmlString()), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_beginHtml);
             _f.Template.EndSection().Returns(_endHtml);
-            _f.Template.BeginNestedSection(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _title.ToHtmlString()), Arg.Any<IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_nestedBeginHtml);
+            _f.Template.BeginNestedSection(Arg.Is Nancy.ViewEngines.Razor.IHtmlString>(h => h.ToHtmlString() == _title.ToHtmlString()), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_nestedBeginHtml);
             _f.Template.EndNestedSection().Returns(_nestedEndHtml);
         }
 
@@ -88,9 +88,9 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Output_a_field([Values(true, false)] bool isValid)
         {
-            var labelHtml = Substitute.For<IHtmlString>();
-            var elementHtml = Substitute.For<IHtmlString>();
-            var validationHtml = Substitute.For<IHtmlString>();
+            var labelHtml = Substitute.For Nancy.ViewEngines.Razor.IHtmlString>();
+            var elementHtml = Substitute.For Nancy.ViewEngines.Razor.IHtmlString>();
+            var validationHtml = Substitute.For Nancy.ViewEngines.Razor.IHtmlString>();
             var metadata = new ModelMetadata(Substitute.For<ModelMetadataProvider>(), null, null, typeof(string), null);
             var expectedOutput = new HtmlString("output");
             _f.Template.Field(labelHtml, elementHtml, validationHtml, metadata, Arg.Any<IReadonlyFieldConfiguration>(), isValid).Returns(expectedOutput);

@@ -1,9 +1,10 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Templates;
+using Nancy.ViewEngines.Razor;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Templates;
 
-namespace ChameleonForms.Component
+namespace NancyContrib.Chameleon.Component
 {
     /// <summary>
     /// Wraps the output of a form section.
@@ -12,9 +13,9 @@ namespace ChameleonForms.Component
     /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
     public class Section<TModel, TTemplate> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
     {
-        private readonly IHtmlString _title;
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _title;
         private readonly bool _nested;
-        private readonly IHtmlString _leadingHtml;
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _leadingHtml;
         private readonly HtmlAttributes _htmlAttributes;
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace ChameleonForms.Component
         /// <param name="nested">Whether the section is nested within another section</param>
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
-        public Section(IForm<TModel, TTemplate> form, IHtmlString title, bool nested, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null) : base(form, false)
+        public Section(IForm<TModel, TTemplate> form,   Nancy.ViewEngines.Razor.IHtmlString title, bool nested,   Nancy.ViewEngines.Razor.IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null) : base(form, false)
         {
             _title = title;
             _nested = nested;
@@ -43,19 +44,19 @@ namespace ChameleonForms.Component
         /// <param name="metadata">Any field metadata</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
-        public IFieldConfiguration Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml = null, ModelMetadata metadata = null, bool isValid = true)
+        public IFieldConfiguration Field(   Nancy.ViewEngines.Razor.IHtmlString labelHtml,    Nancy.ViewEngines.Razor.IHtmlString elementHtml,   Nancy.ViewEngines.Razor.IHtmlString validationHtml = null, ModelMetadata metadata = null, bool isValid = true)
         {
             var fc = new FieldConfiguration();
             fc.SetField(() => Form.Template.Field(labelHtml, elementHtml, validationHtml, metadata, new ReadonlyFieldConfiguration(fc), isValid));
             return fc;
         }
 
-        public override IHtmlString Begin()
+        public override    Nancy.ViewEngines.Razor.IHtmlString Begin()
         {
             return _nested ? Form.Template.BeginNestedSection(_title, _leadingHtml, _htmlAttributes) : Form.Template.BeginSection(_title, _leadingHtml, _htmlAttributes);
         }
 
-        public override IHtmlString End()
+        public override    Nancy.ViewEngines.Razor.IHtmlString End()
         {
             return _nested ? Form.Template.EndNestedSection() : Form.Template.EndSection();
         }
@@ -81,7 +82,7 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container specified as an anonymous object</param>
         /// <returns>The form section</returns>
-        public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this IForm<TModel, TTemplate> form, string title,  IHtmlString leadingHtml = null, object htmlAttributes = null) where TTemplate : IFormTemplate
+        public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this IForm<TModel, TTemplate> form, string title,    Nancy.ViewEngines.Razor.IHtmlString leadingHtml = null, object htmlAttributes = null) where TTemplate : IFormTemplate
         {
             return form.BeginSection(title, leadingHtml, htmlAttributes.ToHtmlAttributes());
         }
@@ -101,9 +102,9 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The form section</returns>
-        public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this IForm<TModel, TTemplate> form, string title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) where TTemplate : IFormTemplate
+        public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this IForm<TModel, TTemplate> form, string title,   Nancy.ViewEngines.Razor.IHtmlString leadingHtml, HtmlAttributes htmlAttributes) where TTemplate : IFormTemplate
         {
-            return new Section<TModel, TTemplate>(form, new HtmlString(HttpUtility.HtmlEncode(title)), false, leadingHtml, htmlAttributes);
+            return new Section<TModel, TTemplate>(form, new NonEncodedHtmlString(HttpUtility.HtmlEncode(title)), false, leadingHtml, htmlAttributes);
         }
 
         /// <summary>
@@ -123,9 +124,9 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this Section<TModel, TTemplate> section, string title, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null) where TTemplate : IFormTemplate
+        public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this Section<TModel, TTemplate> section, string title,   Nancy.ViewEngines.Razor.IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null) where TTemplate : IFormTemplate
         {
-            return new Section<TModel, TTemplate>(section.Form, new HtmlString(HttpUtility.HtmlEncode(title)), true, leadingHtml, htmlAttributes);
+            return new Section<TModel, TTemplate>(section.Form, new NonEncodedHtmlString(HttpUtility.HtmlEncode(title)), true, leadingHtml, htmlAttributes);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ChameleonForms.Enums
+﻿namespace NancyContrib.Chameleon.Enums
 {
     internal enum TextInputType
     {

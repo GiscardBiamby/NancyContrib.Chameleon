@@ -1,11 +1,12 @@
 ﻿using System.Web;
-using System.Web.Mvc;
-using ChameleonForms.Component;
-using ChameleonForms.Enums;
-using ChameleonForms.Example.Forms.Templates;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Component;
+using NancyContrib.Chameleon.Enums;
+using NancyContrib.Chameleon.Example.Forms.Templates;
+using NancyContrib.Chameleon.Templates;
+using Nancy.ViewEngines.Razor;
+using NancyContrib.Chameleon;
 
-namespace ChameleonForms.Example.Forms.Components
+namespace NancyContrib.Chameleon.Example.Forms.Components
 {
     /// <summary>
     /// Illustrates using a custom template class and wrapping an unencoded string output.
@@ -28,7 +29,7 @@ namespace ChameleonForms.Example.Forms.Components
     /// <summary>
     /// Illustrates using a custom template class and wrapping an encoded HTML string output.
     /// </summary>
-    public class RandomComponent2<TModel> : IFormComponent<TModel, RandomFormTemplate>, IHtmlString
+    public class RandomComponent2<TModel> : IFormComponent<TModel, RandomFormTemplate>,  Nancy.ViewEngines.Razor.IHtmlString
     {
         public IForm<TModel, RandomFormTemplate> Form { get; private set; }
 
@@ -45,7 +46,7 @@ namespace ChameleonForms.Example.Forms.Components
 
     public static class RandomComponentExtensions
     {
-        public static Form<TModel, RandomFormTemplate> BeginRandomForm<TModel>(this HtmlHelper<TModel> helper, string action, FormMethod method, object htmlAttributes = null, EncType? enctype = null)
+        public static Form<TModel, RandomFormTemplate> BeginRandomForm<TModel>(this HtmlHelpers<TModel> helper, string action, FormMethod method, object htmlAttributes = null, EncType? enctype = null)
         {
             return new Form<TModel, RandomFormTemplate>(helper, new RandomFormTemplate(), action, method, htmlAttributes.ToHtmlAttributes(), enctype);
         }

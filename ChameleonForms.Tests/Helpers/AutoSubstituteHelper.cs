@@ -6,10 +6,10 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using AutofacContrib.NSubstitute;
-using ChameleonForms.Example;
+using NancyContrib.Chameleon.Example;
 using NSubstitute;
 
-namespace ChameleonForms.Tests.Helpers
+namespace NancyContrib.Chameleon.Tests.Helpers
 {
     public static class AutoSubstituteContainer
     {

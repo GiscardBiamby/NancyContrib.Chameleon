@@ -1,8 +1,8 @@
 ﻿using ApprovalTests.Html;
-using ChameleonForms.Tests.Helpers;
+using NancyContrib.Chameleon.Tests.Helpers;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
+namespace NancyContrib.Chameleon.Tests.FieldGenerator.DefaultFieldGenerator
 {
     class DateTimeTests : DefaultFieldGeneratorShould
     {

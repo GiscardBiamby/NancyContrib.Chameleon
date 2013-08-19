@@ -1,4 +1,4 @@
-using ChameleonForms.ModelBinders;
+using NancyContrib.Chameleon.ModelBinders;
 using System;
 using System.Web.Mvc;
 

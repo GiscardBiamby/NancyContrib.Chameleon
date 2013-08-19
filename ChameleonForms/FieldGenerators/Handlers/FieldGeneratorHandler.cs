@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Enums;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Enums;
+using NancyContrib.Chameleon.Templates;
 using System.Linq;
+using Nancy.ViewEngines.Razor;
 
-namespace ChameleonForms.FieldGenerators.Handlers
+namespace NancyContrib.Chameleon.FieldGenerators.Handlers
 {
     internal abstract class FieldGeneratorHandler<TModel, T>
     {
@@ -38,7 +39,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         public abstract bool CanHandle();
-        public abstract IHtmlString GenerateFieldHtml();
+        public abstract Nancy.ViewEngines.Razor.IHtmlString GenerateFieldHtml();
         public virtual void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration) {}
 
         protected bool HasMultipleValues()
@@ -79,10 +80,12 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return NumericTypes.Contains(GetUnderlyingType());
         }
 
-        protected IHtmlString GetInputHtml(TextInputType inputType)
+        protected Nancy.ViewEngines.Razor.IHtmlString GetInputHtml(TextInputType inputType)
         {
+            ///TODO: GB fix this so it renders the password with the correct attributes: 
             if (inputType == TextInputType.Password)
-                return FieldGenerator.HtmlHelper.PasswordFor(FieldGenerator.FieldProperty, FieldConfiguration.HtmlAttributes);
+                return new NonEncodedHtmlString(string.Format(@"<input type=""password"" id="""" name="""" class="""" />"));
+                //return FieldGenerator.HtmlHelper.PasswordFor(FieldGenerator.FieldProperty, FieldConfiguration.HtmlAttributes);
 
             var attrs = new HtmlAttributes(FieldConfiguration.HtmlAttributes);
             attrs.Attr(type => inputType.ToString().ToLower());
@@ -121,7 +124,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return false;
         }
 
-        protected IHtmlString GetSelectListHtml(IEnumerable<SelectListItem> selectList)
+        protected Nancy.ViewEngines.Razor.IHtmlString GetSelectListHtml(IEnumerable<SelectListItem> selectList)
         {
             if (HasEmptySelectListItem())
                 selectList = new []{GetEmptySelectListItem()}.Union(selectList);
@@ -175,7 +178,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             };
         }
 
-        private IEnumerable<IHtmlString> SelectListToRadioList(IEnumerable<SelectListItem> selectList)
+        private IEnumerable<Nancy.ViewEngines.Razor.IHtmlString> SelectListToRadioList(IEnumerable<SelectListItem> selectList)
         {
             var count = 0;
             foreach (var item in selectList)
@@ -187,7 +190,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 attrs.Attr("id", id);
                 if (HasMultipleValues())
                     AdjustHtmlForModelState(attrs);
-                yield return new HtmlString(string.Format("{0} {1}",
+                yield return new NonEncodedHtmlString(string.Format("{0} {1}",
                     HasMultipleValues()
                         ? HtmlCreator.BuildSingleCheckbox(GetFieldName(), item.Selected, attrs, item.Value)
                         : FieldGenerator.HtmlHelper.RadioButtonFor(FieldGenerator.FieldProperty, item.Value, attrs.ToDictionary()),
@@ -204,19 +207,21 @@ namespace ChameleonForms.FieldGenerators.Handlers
         
         protected void AdjustHtmlForModelState(HtmlAttributes attrs)
         {
-            var name = ExpressionHelper.GetExpressionText(FieldGenerator.FieldProperty);
-            var fullName = FieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+            ///TODO: GB
+            throw new NotImplementedException();
+            //var name = ExpressionHelper.GetExpressionText(FieldGenerator.FieldProperty);
+            //var fullName = FieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
-            ModelState modelState;
-            if (FieldGenerator.HtmlHelper.ViewContext.ViewData.ModelState.TryGetValue(fullName, out modelState))
-            {
-                if (modelState.Errors.Count > 0)
-                {
-                    attrs.AddClass(HtmlHelper.ValidationInputCssClassName);
-                }
-            }
+            //ModelState modelState;
+            //if (FieldGenerator.HtmlHelper.ViewContext.ViewData.ModelState.TryGetValue(fullName, out modelState))
+            //{
+            //    if (modelState.Errors.Count > 0)
+            //    {
+            //        attrs.AddClass(HtmlHelper.ValidationInputCssClassName);
+            //    }
+            //}
 
-            attrs.Attrs(FieldGenerator.HtmlHelper.GetUnobtrusiveValidationAttributes(name, ModelMetadata.FromLambdaExpression(FieldGenerator.FieldProperty, FieldGenerator.HtmlHelper.ViewData)));
+            //attrs.Attrs(FieldGenerator.HtmlHelper.GetUnobtrusiveValidationAttributes(name, ModelMetadata.FromLambdaExpression(FieldGenerator.FieldProperty, FieldGenerator.HtmlHelper.ViewData)));
         }
     }
 

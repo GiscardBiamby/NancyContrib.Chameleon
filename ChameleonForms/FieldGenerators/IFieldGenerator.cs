@@ -2,9 +2,10 @@
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
-using ChameleonForms.Component.Config;
+using NancyContrib.Chameleon.Component.Config;
+using Nancy.ViewEngines.Razor;
 
-namespace ChameleonForms.FieldGenerators
+namespace NancyContrib.Chameleon.FieldGenerators
 {
     /// <summary>
     /// Generates the HTML for a single form field.
@@ -14,7 +15,7 @@ namespace ChameleonForms.FieldGenerators
         /// <summary>
         /// A HTML helper for the model.
         /// </summary>
-        HtmlHelper<TModel> HtmlHelper { get; }
+        Nancy.ViewEngines.Razor.HtmlHelpers<TModel> HtmlHelper { get; }
 
         /// <summary>
         /// The expression that identifies the property in the model being output.
@@ -61,37 +62,37 @@ namespace ChameleonForms.FieldGenerators
         /// Creates the HTML for the field control.
         /// </summary>
         /// <returns>The HTML for the field control</returns>
-        IHtmlString GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
+           Nancy.ViewEngines.Razor.IHtmlString GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field label.
         /// </summary>
         /// <returns>The HTML for the field label</returns>
-        IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration);
+           Nancy.ViewEngines.Razor.IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field's validation messages
         /// </summary>
         /// <returns>The HTML for the field's validation messages</returns>
-        IHtmlString GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration);
+           Nancy.ViewEngines.Razor.IHtmlString GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field control after preparing the given field configuration.
         /// </summary>
         /// <returns>The HTML for the field control</returns>
-        IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration);
+           Nancy.ViewEngines.Razor.IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field label after preparing the given field configuration.
         /// </summary>
         /// <returns>The HTML for the field label</returns>
-        IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration);
+           Nancy.ViewEngines.Razor.IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field's validation messages after preparing the given field configuration.
         /// </summary>
         /// <returns>The HTML for the field's validation messages</returns>
-        IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration);
+           Nancy.ViewEngines.Razor.IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Returns the id of the field being generated.

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace ChameleonForms.Example.Controllers
+namespace NancyContrib.Chameleon.Example.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,7 +1,7 @@
 ﻿using System.Web;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Templates;
 
-namespace ChameleonForms.Example.Forms.Templates
+namespace NancyContrib.Chameleon.Example.Forms.Templates
 {
     public class RandomFormTemplate : DefaultFormTemplate
     {
@@ -10,7 +10,7 @@ namespace ChameleonForms.Example.Forms.Templates
             return "RANDOM unencoded string &\"<g>!";
         }
 
-        public IHtmlString RandomComponent2()
+        public Nancy.ViewEngines.Razor.IHtmlString RandomComponent2()
         {
             return new HtmlString("<p>Some encoded HTML</p>");
         }

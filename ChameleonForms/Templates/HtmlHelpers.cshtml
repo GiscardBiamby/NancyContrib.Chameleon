@@ -2,6 +2,7 @@
 @using Component.Config
 @using Enums
 @using Templates
+@using Nancy.ViewEngines.Razor
 
 @* Generator: MvcHelper *@
 
@@ -11,14 +12,14 @@
 @:    </form>
 }
 
-@helper BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
+@helper BeginSection(Nancy.ViewEngines.Razor.IHtmlString title,  Nancy.ViewEngines.Razor.IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
 @:    <fieldset@(htmlAttributes)>
 @:        <legend>@title</legend>
 @:        @leadingHtml
 @:        <dl>
 }
     
-@helper BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+@helper BeginNestedSection(Nancy.ViewEngines.Razor.IHtmlString title,  Nancy.ViewEngines.Razor.IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
 {
 @:            <dt>@title</dt>
 @:            <dd>
@@ -52,18 +53,18 @@
     if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="hint">@fieldConfiguration.Hint</div>}
 }
 
-@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata) {
+@helper BeginFieldInternal(Nancy.ViewEngines.Razor.IHtmlString labelHtml,  Nancy.ViewEngines.Razor.IHtmlString elementHtml,  Nancy.ViewEngines.Razor.IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata) {
 @:            <dt>@labelHtml@(new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? " <em class=\"required\">*</em>" : ""))</dt>
 @:            <dd>
 @:                @GetPrependedHtml(fieldConfiguration)@elementHtml@GetAppendedHtml(fieldConfiguration)@GetHint(fieldConfiguration) @validationHtml
 }
 
-@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration) {
+@helper Field(Nancy.ViewEngines.Razor.IHtmlString labelHtml,  Nancy.ViewEngines.Razor.IHtmlString elementHtml,  Nancy.ViewEngines.Razor.IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration) {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata)
 @:            </dd>
 }
 
-@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration)
+@helper BeginField(Nancy.ViewEngines.Razor.IHtmlString labelHtml,  Nancy.ViewEngines.Razor.IHtmlString elementHtml,  Nancy.ViewEngines.Razor.IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration)
 {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata)
 @:                <dl>
@@ -82,7 +83,7 @@
 @:        </div>
 }
 
-@helper BeginMessage(MessageType messageType, IHtmlString heading) {
+@helper BeginMessage(MessageType messageType,  Nancy.ViewEngines.Razor.IHtmlString heading) {
 @:      <div class="@string.Format("{0}{1}", messageType.ToString().ToLower(), "_message")">
 @:          <h3>@heading</h3>
 @:          <div class="message">
@@ -93,13 +94,13 @@
 @:      </div>
 }
 
-@helper MessageParagraph(IHtmlString paragraph) {
+@helper MessageParagraph(Nancy.ViewEngines.Razor.IHtmlString paragraph) {
 @:    <p>
 @:        @paragraph
 @:    </p>
 }
 
-@helper List(IEnumerable<IHtmlString> items) {
+@helper List(IEnumerable<Nancy.ViewEngines.Razor.IHtmlString> items) {
 @:    <ul>
 foreach(var i in items) {
 @:        <li>@i</li>

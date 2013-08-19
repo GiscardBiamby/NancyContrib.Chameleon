@@ -1,4 +1,4 @@
-﻿namespace ChameleonForms.Enums
+﻿namespace NancyContrib.Chameleon.Enums
 {
     /// <summary>
     /// The display type for a field.

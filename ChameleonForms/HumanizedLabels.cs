@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Humanizer;
 
-namespace ChameleonForms
+namespace NancyContrib.Chameleon
 {
     // Of course it *should* be Humanised, but I'll keep consistency with the Humanizer library
     /// <summary>

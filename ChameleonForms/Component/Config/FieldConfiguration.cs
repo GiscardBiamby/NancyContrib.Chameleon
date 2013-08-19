@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Web;
-using ChameleonForms.Enums;
-using ChameleonForms.Templates;
+using Nancy.ViewEngines.Razor;
+using NancyContrib.Chameleon.Enums;
+using NancyContrib.Chameleon.Templates;
 
-namespace ChameleonForms.Component.Config
+namespace NancyContrib.Chameleon.Component.Config
 {
     /// <summary>
     /// Holds configuration data for a form field.
     /// </summary>
-    public interface IFieldConfiguration : IHtmlString
+    public interface IFieldConfiguration :  Nancy.ViewEngines.Razor.IHtmlString
     {
         /// <summary>
         /// A dynamic bag to allow for custom extensions using the field configuration.
@@ -111,7 +112,7 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// Gets any text that has been set for an inline label.
         /// </summary>
-        IHtmlString InlineLabelText { get; }
+         Nancy.ViewEngines.Razor.IHtmlString InlineLabelText { get; }
 
         /// <summary>
         /// Sets an inline label for a checkbox.
@@ -125,12 +126,12 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <param name="labelHtml">The html to use for the label</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration InlineLabel(IHtmlString labelHtml);
+        IFieldConfiguration InlineLabel(Nancy.ViewEngines.Razor.IHtmlString labelHtml);
 
         /// <summary>
         /// Gets any text that has been set for the label.
         /// </summary>
-        IHtmlString LabelText { get; }
+         Nancy.ViewEngines.Razor.IHtmlString LabelText { get; }
 
         /// <summary>
         /// Override the default label for the field.
@@ -144,7 +145,7 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <param name="labelHtml">The text to use for the label</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration Label(IHtmlString labelHtml);
+        IFieldConfiguration Label(Nancy.ViewEngines.Razor.IHtmlString labelHtml);
 
         /// <summary>
         /// Returns the display type for the field.
@@ -206,14 +207,14 @@ namespace ChameleonForms.Component.Config
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
         /// <param name="field">A lambda returning the HTML to output</param>
-        void SetField(Func<IHtmlString> field);
+        void SetField(Func<Nancy.ViewEngines.Razor.IHtmlString> field);
 
         /// <summary>
         /// Sets the field that the field configuration is wrapping so that
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
         /// <param name="field">The field being configured</param>
-        void SetField(IHtmlString field);
+        void SetField(Nancy.ViewEngines.Razor.IHtmlString field);
 
         /// <summary>
         /// Supply a string hint to display along with the field.
@@ -227,19 +228,19 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <param name="hint">The hint markup</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration WithHint(IHtmlString hint);
+        IFieldConfiguration WithHint(Nancy.ViewEngines.Razor.IHtmlString hint);
 
         /// <summary>
         /// Get the hint to display with the field.
         /// </summary>
-        IHtmlString Hint { get; }
+         Nancy.ViewEngines.Razor.IHtmlString Hint { get; }
 
         /// <summary>
         /// Prepends the given HTML to the form field.
         /// </summary>
         /// <param name="html">The HTML to prepend</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration Prepend(IHtmlString html);
+        IFieldConfiguration Prepend(Nancy.ViewEngines.Razor.IHtmlString html);
 
         /// <summary>
         /// Prepends the given string to the form field.
@@ -251,14 +252,14 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// A list of HTML to be prepended to the form field in ltr order.
         /// </summary>
-        IEnumerable<IHtmlString> PrependedHtml { get; }
+        IEnumerable<Nancy.ViewEngines.Razor.IHtmlString> PrependedHtml { get; }
 
         /// <summary>
         /// Appends the given HTML to the form field.
         /// </summary>
         /// <param name="html">The HTML to append</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration Append(IHtmlString html);
+        IFieldConfiguration Append(Nancy.ViewEngines.Razor.IHtmlString html);
 
         /// <summary>
         /// Appends the given string to the form field.
@@ -270,7 +271,7 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// A list of HTML to be appended to the form field in ltr order.
         /// </summary>
-        IEnumerable<IHtmlString> AppendedHtml { get; }
+        IEnumerable<Nancy.ViewEngines.Razor.IHtmlString> AppendedHtml { get; }
 
         /// <summary>
         /// Override the HTML of the form field.
@@ -281,12 +282,12 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <param name="html">The HTML for the field</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration OverrideFieldHtml(IHtmlString html);
+        IFieldConfiguration OverrideFieldHtml(Nancy.ViewEngines.Razor.IHtmlString html);
 
         /// <summary>
         /// The HTML to be used as the field html.
         /// </summary>
-        IHtmlString FieldHtml { get; }
+         Nancy.ViewEngines.Razor.IHtmlString FieldHtml { get; }
         
         /// <summary>
         /// Uses the given format string when outputting the field value.
@@ -334,10 +335,10 @@ namespace ChameleonForms.Component.Config
     /// </summary>
     public class FieldConfiguration : IFieldConfiguration
     {
-        private Func<IHtmlString> _field;
-        private readonly List<IHtmlString> _prependedHtml = new List<IHtmlString>();
-        private readonly List<IHtmlString> _appendedHtml = new List<IHtmlString>();
-        private IHtmlString _fieldHtml;
+        private Func<Nancy.ViewEngines.Razor.IHtmlString> _field;
+        private readonly List<Nancy.ViewEngines.Razor.IHtmlString> _prependedHtml = new List<Nancy.ViewEngines.Razor.IHtmlString>();
+        private readonly List<Nancy.ViewEngines.Razor.IHtmlString> _appendedHtml = new List<Nancy.ViewEngines.Razor.IHtmlString>();
+        private Nancy.ViewEngines.Razor.IHtmlString _fieldHtml;
 
         /// <summary>
         /// Constructs a field configuration.
@@ -430,29 +431,29 @@ namespace ChameleonForms.Component.Config
             return this;
         }
 
-        public IHtmlString InlineLabelText { get; private set; }
+        public Nancy.ViewEngines.Razor.IHtmlString InlineLabelText { get; private set; }
 
         public IFieldConfiguration InlineLabel(string labelText)
         {
-            InlineLabelText = new HtmlString(HttpUtility.HtmlEncode(labelText));
+            InlineLabelText = new NonEncodedHtmlString(HttpUtility.HtmlEncode(labelText));
             return this;
         }
 
-        public IFieldConfiguration InlineLabel(IHtmlString labelHtml)
+        public IFieldConfiguration InlineLabel(Nancy.ViewEngines.Razor.IHtmlString labelHtml)
         {
             InlineLabelText = labelHtml;
             return this;
         }
 
-        public IHtmlString LabelText { get; private set; }
+        public Nancy.ViewEngines.Razor.IHtmlString LabelText { get; private set; }
 
         public IFieldConfiguration Label(string labelText)
         {
-            LabelText = new HtmlString(HttpUtility.HtmlEncode(labelText));
+            LabelText = new NonEncodedHtmlString(HttpUtility.HtmlEncode(labelText));
             return this;
         }
 
-        public IFieldConfiguration Label(IHtmlString labelHtml)
+        public IFieldConfiguration Label(Nancy.ViewEngines.Razor.IHtmlString labelHtml)
         {
             LabelText = labelHtml;
             return this;
@@ -493,26 +494,26 @@ namespace ChameleonForms.Component.Config
             return this;
         }
 
-        public void SetField(IHtmlString field)
+        public void SetField(Nancy.ViewEngines.Razor.IHtmlString field)
         {
             _field = () => field;
         }
 
         public IFieldConfiguration WithHint(string hint)
         {
-            Hint = new HtmlString(HttpUtility.HtmlEncode(hint));
+            Hint = new NonEncodedHtmlString(HttpUtility.HtmlEncode(hint));
             return this;
         }
 
-        public IFieldConfiguration WithHint(IHtmlString hint)
+        public IFieldConfiguration WithHint(Nancy.ViewEngines.Razor.IHtmlString hint)
         {
             Hint = hint;
             return this;
         }
 
-        public IHtmlString Hint { get; private set; }
+        public Nancy.ViewEngines.Razor.IHtmlString Hint { get; private set; }
         
-        public IFieldConfiguration Prepend(IHtmlString html)
+        public IFieldConfiguration Prepend(Nancy.ViewEngines.Razor.IHtmlString html)
         {
             _prependedHtml.Add(html);
             return this;
@@ -520,13 +521,13 @@ namespace ChameleonForms.Component.Config
 
         public IFieldConfiguration Prepend(string str)
         {
-            _prependedHtml.Add(new HtmlString(HttpUtility.HtmlEncode(str)));
+            _prependedHtml.Add(new NonEncodedHtmlString(HttpUtility.HtmlEncode(str)));
             return this;
         }
 
-        public IEnumerable<IHtmlString> PrependedHtml { get { var html = _prependedHtml.ToArray(); Array.Reverse(html); return html; } }
+        public IEnumerable<Nancy.ViewEngines.Razor.IHtmlString> PrependedHtml { get { var html = _prependedHtml.ToArray(); Array.Reverse(html); return html; } }
         
-        public IFieldConfiguration Append(IHtmlString html)
+        public IFieldConfiguration Append(Nancy.ViewEngines.Razor.IHtmlString html)
         {
             _appendedHtml.Add(html);
             return this;
@@ -534,11 +535,11 @@ namespace ChameleonForms.Component.Config
 
         public IFieldConfiguration Append(string str)
         {
-            _appendedHtml.Add(new HtmlString(HttpUtility.HtmlEncode(str)));
+            _appendedHtml.Add(new NonEncodedHtmlString(HttpUtility.HtmlEncode(str)));
             return this;
         }
 
-        public IEnumerable<IHtmlString> AppendedHtml { get { return _appendedHtml.ToArray(); } }
+        public IEnumerable<Nancy.ViewEngines.Razor.IHtmlString> AppendedHtml { get { return _appendedHtml.ToArray(); } }
 
         public IFieldConfiguration WithFormatString(string formatString)
         {
@@ -564,15 +565,15 @@ namespace ChameleonForms.Component.Config
 
         public bool HasLabel { get; private set; }
 
-        public IFieldConfiguration OverrideFieldHtml(IHtmlString html)
+        public IFieldConfiguration OverrideFieldHtml(Nancy.ViewEngines.Razor.IHtmlString html)
         {
             _fieldHtml = html;
             return this;
         }
 
-        public IHtmlString FieldHtml { get { return _fieldHtml; } }
+        public Nancy.ViewEngines.Razor.IHtmlString FieldHtml { get { return _fieldHtml; } }
 
-        public void SetField(Func<IHtmlString> field)
+        public void SetField(Func<Nancy.ViewEngines.Razor.IHtmlString> field)
         {
             _field = field;
         }

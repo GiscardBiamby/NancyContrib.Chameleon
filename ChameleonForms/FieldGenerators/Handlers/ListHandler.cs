@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
-using ChameleonForms.Attributes;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Enums;
+using NancyContrib.Chameleon.Attributes;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Enums;
 
-namespace ChameleonForms.FieldGenerators.Handlers
+namespace NancyContrib.Chameleon.FieldGenerators.Handlers
 {
     internal class ListHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
@@ -21,7 +21,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 && FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? == true;
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override Nancy.ViewEngines.Razor.IHtmlString GenerateFieldHtml()
         {
             var model = FieldGenerator.GetModel();
             var selectList = GetSelectList(model);

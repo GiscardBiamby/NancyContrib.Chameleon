@@ -1,81 +1,82 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Enums;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Enums;
+using Nancy.ViewEngines.Razor;
 
-namespace ChameleonForms.Templates
+namespace NancyContrib.Chameleon.Templates
 {
     /// <summary>
     /// The default Chameleon Forms form template renderer.
     /// </summary>
     public class DefaultFormTemplate : IFormTemplate
     {
-        public virtual IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        public virtual Nancy.ViewEngines.Razor.IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
         {
             return HtmlCreator.BuildFormTag(action, method, htmlAttributes, enctype);
         }
 
-        public virtual IHtmlString EndForm()
+        public virtual Nancy.ViewEngines.Razor.IHtmlString EndForm()
         {
             return HtmlHelpers.EndForm();
         }
 
-        public virtual IHtmlString BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+        public virtual Nancy.ViewEngines.Razor.IHtmlString BeginSection(Nancy.ViewEngines.Razor.IHtmlString title,   Nancy.ViewEngines.Razor.IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
             return HtmlHelpers.BeginSection(title, leadingHtml, htmlAttributes);
         }
 
-        public virtual IHtmlString EndSection()
+        public virtual Nancy.ViewEngines.Razor.IHtmlString EndSection()
         {
             return HtmlHelpers.EndSection();
         }
 
-        public virtual IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+        public virtual Nancy.ViewEngines.Razor.IHtmlString BeginNestedSection(Nancy.ViewEngines.Razor.IHtmlString title,   Nancy.ViewEngines.Razor.IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
             return HtmlHelpers.BeginNestedSection(title, leadingHtml, htmlAttributes);
         }
 
-        public virtual IHtmlString EndNestedSection()
+        public virtual Nancy.ViewEngines.Razor.IHtmlString EndNestedSection()
         {
             return HtmlHelpers.EndNestedSection();
         }
 
-        public virtual IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        public virtual Nancy.ViewEngines.Razor.IHtmlString Field(Nancy.ViewEngines.Razor.IHtmlString labelHtml,   Nancy.ViewEngines.Razor.IHtmlString elementHtml,   Nancy.ViewEngines.Razor.IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
             return HtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
         }
 
-        public virtual IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        public virtual Nancy.ViewEngines.Razor.IHtmlString BeginField(Nancy.ViewEngines.Razor.IHtmlString labelHtml,   Nancy.ViewEngines.Razor.IHtmlString elementHtml,   Nancy.ViewEngines.Razor.IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
             return HtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
         }
 
-        public virtual IHtmlString EndField()
+        public virtual Nancy.ViewEngines.Razor.IHtmlString EndField()
         {
             return HtmlHelpers.EndField();
         }
 
-        public virtual IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
+        public virtual Nancy.ViewEngines.Razor.IHtmlString BeginMessage(MessageType messageType, Nancy.ViewEngines.Razor.IHtmlString heading)
         {
             return HtmlHelpers.BeginMessage(messageType, heading);
         }
 
-        public virtual IHtmlString EndMessage()
+        public virtual Nancy.ViewEngines.Razor.IHtmlString EndMessage()
         {
             return HtmlHelpers.EndMessage();
         }
 
-        public virtual IHtmlString MessageParagraph(IHtmlString paragraph)
+        public virtual Nancy.ViewEngines.Razor.IHtmlString MessageParagraph(Nancy.ViewEngines.Razor.IHtmlString paragraph)
         {
             return HtmlHelpers.MessageParagraph(paragraph);
         }
 
-        public virtual IHtmlString BeginNavigation()
+        public virtual Nancy.ViewEngines.Razor.IHtmlString BeginNavigation()
         {
             return HtmlHelpers.BeginNavigation();
         }
 
-        public virtual IHtmlString EndNavigation()
+        public virtual Nancy.ViewEngines.Razor.IHtmlString EndNavigation()
         {
             return HtmlHelpers.EndNavigation();
         }

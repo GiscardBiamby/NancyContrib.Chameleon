@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests
+namespace NancyContrib.Chameleon.Tests
 {
     [TestFixture]
     class HumanizedLabelsShould

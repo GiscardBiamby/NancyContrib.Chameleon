@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using ApprovalTests.Html;
-using ChameleonForms.Component.Config;
+using NancyContrib.Chameleon.Component.Config;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
+namespace NancyContrib.Chameleon.Tests.FieldGenerator.DefaultFieldGenerator
 {
     class EnumTests : DefaultFieldGeneratorShould
     {

@@ -1,9 +1,9 @@
 ﻿using System.Web;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Enums;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Enums;
 using System.Web.Mvc;
 
-namespace ChameleonForms.Templates
+namespace NancyContrib.Chameleon.Templates
 {
     /// <summary>
     /// A Chameleon Forms form template renderer.
@@ -18,13 +18,13 @@ namespace ChameleonForms.Templates
         /// <param name="htmlAttributes">Any HTML attributes the form should use; specified as an anonymous object</param>
         /// <param name="enctype">The encoding type for the form</param>
         /// <returns>The starting HTML for a form</returns>
-        IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype);
+         Nancy.ViewEngines.Razor.IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype);
 
         /// <summary>
         /// Creates the ending HTML for a form.
         /// </summary>
         /// <returns>The ending HTML for a form</returns>
-        IHtmlString EndForm();
+         Nancy.ViewEngines.Razor.IHtmlString EndForm();
 
         /// <summary>
         /// Creates the beginning HTML for a section.
@@ -33,13 +33,13 @@ namespace ChameleonForms.Templates
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes the section container should use; specified as an anonymous object</param>
         /// <returns>The beginning HTML for a section</returns>
-        IHtmlString BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes);
+         Nancy.ViewEngines.Razor.IHtmlString BeginSection(Nancy.ViewEngines.Razor.IHtmlString title,  Nancy.ViewEngines.Razor.IHtmlString leadingHtml, HtmlAttributes htmlAttributes);
 
         /// <summary>
         /// Creates the ending HTML for a section.
         /// </summary>
         /// <returns>The ending HTML for a section</returns>
-        IHtmlString EndSection();
+         Nancy.ViewEngines.Razor.IHtmlString EndSection();
 
         /// <summary>
         /// Creates the beginning HTML for a section that is nested within another section.
@@ -48,13 +48,13 @@ namespace ChameleonForms.Templates
         /// <param name="leadingHtml">Any HTML to output at the start of the nested section</param>
         /// <param name="htmlAttributes">Any HTML attributes the nested section container should use; specified as an anaonymous object</param>
         /// <returns>The beginning HTML for a nested section</returns>
-        IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes);
+         Nancy.ViewEngines.Razor.IHtmlString BeginNestedSection(Nancy.ViewEngines.Razor.IHtmlString title,  Nancy.ViewEngines.Razor.IHtmlString leadingHtml, HtmlAttributes htmlAttributes);
 
         /// <summary>
         /// Creates the ending HTML for a section that is nested within another section.
         /// </summary>
         /// <returns>The ending HTML for a nested section</returns>
-        IHtmlString EndNestedSection();
+         Nancy.ViewEngines.Razor.IHtmlString EndNestedSection();
 
         /// <summary>
         /// Creates the HTML for a single form field.
@@ -66,7 +66,7 @@ namespace ChameleonForms.Templates
         /// <param name="fieldConfiguration">Configuration for the field</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>The HTML for the field</returns>
-        IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
+         Nancy.ViewEngines.Razor.IHtmlString Field(Nancy.ViewEngines.Razor.IHtmlString labelHtml,  Nancy.ViewEngines.Razor.IHtmlString elementHtml,  Nancy.ViewEngines.Razor.IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
 
         /// <summary>
         /// Creates the beginning HTML for a single form field that contains other fields nested within it.
@@ -78,25 +78,25 @@ namespace ChameleonForms.Templates
         /// <param name="fieldConfiguration">Configuration for the field</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>The beginning HTML for the parent field</returns>
-        IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
+         Nancy.ViewEngines.Razor.IHtmlString BeginField(Nancy.ViewEngines.Razor.IHtmlString labelHtml,  Nancy.ViewEngines.Razor.IHtmlString elementHtml,  Nancy.ViewEngines.Razor.IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
 
         /// <summary>
         /// Creates the ending HTML for a single form field that contains other fields nested within it.
         /// </summary>
         /// <returns>The ending HTML for the parent field</returns>
-        IHtmlString EndField();
+         Nancy.ViewEngines.Razor.IHtmlString EndField();
 
         /// <summary>
         /// Creates the beginning HTML for a navigation section.
         /// </summary>
         /// <returns>The beginning HTML for a navigation section</returns>
-        IHtmlString BeginNavigation();
+         Nancy.ViewEngines.Razor.IHtmlString BeginNavigation();
 
         /// <summary>
         /// Creates the ending HTML for a navigation section.
         /// </summary>
         /// <returns>The ending HTML for a navigation section</returns>
-        IHtmlString EndNavigation();
+         Nancy.ViewEngines.Razor.IHtmlString EndNavigation();
 
         /// <summary>
         /// Creates the beginning HTML for a message.
@@ -104,19 +104,19 @@ namespace ChameleonForms.Templates
         /// <param name="messageType">The type of message being displayed</param>
         /// <param name="heading">The heading for the message</param>
         /// <returns>The beginning HTML for the message</returns>
-        IHtmlString BeginMessage(MessageType messageType, IHtmlString heading);
+         Nancy.ViewEngines.Razor.IHtmlString BeginMessage(MessageType messageType,  Nancy.ViewEngines.Razor.IHtmlString heading);
 
         /// <summary>
         /// Creates the ending HTML for a message.
         /// </summary>
         /// <returns>The ending HTML for the message</returns>
-        IHtmlString EndMessage();
+         Nancy.ViewEngines.Razor.IHtmlString EndMessage();
 
         /// <summary>
         /// Creates the HTML for a paragraph in a message.
         /// </summary>
         /// <param name="paragraph">The paragraph HTML</param>
         /// <returns>The HTML for the message paragraph</returns>
-        IHtmlString MessageParagraph(IHtmlString paragraph);
+         Nancy.ViewEngines.Razor.IHtmlString MessageParagraph(Nancy.ViewEngines.Razor.IHtmlString paragraph);
     }
 }

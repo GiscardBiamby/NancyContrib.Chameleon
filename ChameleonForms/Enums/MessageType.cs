@@ -1,4 +1,4 @@
-namespace ChameleonForms.Enums
+namespace NancyContrib.Chameleon.Enums
 {
     /// <summary>
     /// Types of messages that can be displayed to the user

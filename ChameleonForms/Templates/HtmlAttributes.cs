@@ -5,12 +5,12 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ChameleonForms.Templates
+namespace NancyContrib.Chameleon.Templates
 {
     /// <summary>
     /// Represents a set of HTML attributes.
     /// </summary>
-    public class HtmlAttributes : IHtmlString
+    public class HtmlAttributes :  Nancy.ViewEngines.Razor.IHtmlString
     {
         private readonly TagBuilder _tagBuilder = new TagBuilder("p");
 

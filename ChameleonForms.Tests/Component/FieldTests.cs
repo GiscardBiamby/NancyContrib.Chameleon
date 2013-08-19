@@ -2,15 +2,15 @@
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
-using ChameleonForms.Component;
-using ChameleonForms.Component.Config;
-using ChameleonForms.FieldGenerators;
-using ChameleonForms.Templates;
-using ChameleonForms.Tests.Helpers;
+using NancyContrib.Chameleon.Component;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.FieldGenerators;
+using NancyContrib.Chameleon.Templates;
+using NancyContrib.Chameleon.Tests.Helpers;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Component
+namespace NancyContrib.Chameleon.Tests.Component
 {
     public class TestFieldViewModel
     {
@@ -22,12 +22,12 @@ namespace ChameleonForms.Tests.Component
     {
         #region Setup
         private const string FieldId = "FieldId";
-        private readonly IHtmlString _beginHtml = new HtmlString("b");
-        private readonly IHtmlString _endHtml = new HtmlString("e");
-        private readonly IHtmlString _html = new HtmlString("h");
-        private readonly IHtmlString _label = new HtmlString("l");
-        private readonly IHtmlString _field = new HtmlString("f");
-        private readonly IHtmlString _validation = new HtmlString("v");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _beginHtml = new HtmlString("b");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _endHtml = new HtmlString("e");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _html = new HtmlString("h");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _label = new HtmlString("l");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _field = new HtmlString("f");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _validation = new HtmlString("v");
         private readonly ModelMetadata _metadata = new ModelMetadata(new EmptyModelMetadataProvider(), null, null, typeof(object), null);
         private IForm<TestFieldViewModel, IFormTemplate> _f;
         private IFieldGenerator _g;
@@ -51,7 +51,7 @@ namespace ChameleonForms.Tests.Component
             _g.GetFieldId().Returns(FieldId);
 
             var autoSubstitute = AutoSubstituteContainer.Create();
-            var helper = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            var helper = autoSubstitute.Resolve<HtmlHelpers<TestFieldViewModel>>();
             _f.HtmlHelper.Returns(helper);
             _f.GetFieldGenerator(Arg.Any<Expression<Func<TestFieldViewModel, string>>>()).Returns(_g);
         }
@@ -69,7 +69,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().Field(Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 true
             );
         }
@@ -82,7 +82,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().Field(Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 false
             );
         }
@@ -94,7 +94,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().BeginField(Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 true
             );
         }
@@ -107,7 +107,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().BeginField(Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 false
             );
         }
@@ -153,7 +153,7 @@ namespace ChameleonForms.Tests.Component
             var f = s.FieldFor(m => m.SomeProperty);
 
             Assert.That(f, Is.Not.Null);
-            _f.DidNotReceive().Write(Arg.Any<IHtmlString>());
+            _f.DidNotReceive().Write(Arg.Any Nancy.ViewEngines.Razor.IHtmlString>());
         }
 
         [Test]
@@ -165,7 +165,7 @@ namespace ChameleonForms.Tests.Component
             var f = s.FieldFor(m => m.SomeProperty);
 
             Assert.That(f, Is.Not.Null);
-            _f.DidNotReceive().Write(Arg.Any<IHtmlString>());
+            _f.DidNotReceive().Write(Arg.Any Nancy.ViewEngines.Razor.IHtmlString>());
         }
 
 
@@ -174,7 +174,7 @@ namespace ChameleonForms.Tests.Component
         {
             var h = new HtmlString("");
             var s = new Section<TestFieldViewModel, IFormTemplate>(_f, new HtmlString(""), false);
-            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(h);
+            _f.Template.BeginField(Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(h);
             _f.ClearReceivedCalls();
 
             var f = s.BeginFieldFor(m => m.SomeProperty);

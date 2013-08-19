@@ -1,19 +1,19 @@
 ﻿using System.Web;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
-using ChameleonForms.Component;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Component;
+using NancyContrib.Chameleon.Templates;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Component
+namespace NancyContrib.Chameleon.Tests.Component
 {
     [TestFixture]
     [UseReporter(typeof(DiffReporter))]
     public class NavigationShould
     {
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _beginHtml = new HtmlString("");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _endHtml = new HtmlString("");
         private IForm<object, IFormTemplate> _f;
         private readonly HtmlAttributes _attrs = new HtmlAttributes(new { @class = "someclass" });
 

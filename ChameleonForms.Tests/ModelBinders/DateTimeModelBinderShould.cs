@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
-using ChameleonForms.ModelBinders;
-using ChameleonForms.Tests.Helpers;
+using NancyContrib.Chameleon.ModelBinders;
+using NancyContrib.Chameleon.Tests.Helpers;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.ModelBinders
+namespace NancyContrib.Chameleon.Tests.ModelBinders
 {
     [TestFixture(TypeArgs = new[]{typeof(DateTime)})]
     [TestFixture(TypeArgs = new[]{typeof(DateTime?)})]

@@ -4,10 +4,10 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
-using ChameleonForms.Attributes;
-using ChameleonForms.Component.Config;
+using NancyContrib.Chameleon.Attributes;
+using NancyContrib.Chameleon.Component.Config;
 
-namespace ChameleonForms.Example.Controllers
+namespace NancyContrib.Chameleon.Example.Controllers
 {
     public class ExampleFormsController : Controller
     {

@@ -1,26 +1,26 @@
 ﻿using System.Web;
-using ChameleonForms.Component;
-using ChameleonForms.Enums;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Component;
+using NancyContrib.Chameleon.Enums;
+using NancyContrib.Chameleon.Templates;
 using FizzWare.NBuilder;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Component
+namespace NancyContrib.Chameleon.Tests.Component
 {
     [TestFixture]
     public class MessageShould
     {
-        private readonly IHtmlString _testHeading = new HtmlString("TestHeading");
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _testHeading = new HtmlString("TestHeading");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _beginHtml = new HtmlString("");
+        private readonly Nancy.ViewEngines.Razor.IHtmlString _endHtml = new HtmlString("");
         private IForm<object, IFormTemplate> _f;
 
         [SetUp]
         public void Setup()
         {
             _f = Substitute.For<IForm<object, IFormTemplate>>();
-            _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any<IHtmlString>()).Returns(_beginHtml);
+            _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any Nancy.ViewEngines.Razor.IHtmlString>()).Returns(_beginHtml);
             _f.Template.EndMessage().Returns(_endHtml);
         }
 
@@ -61,9 +61,9 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Create_a_paragraph_with_a_string()
         {
-            var html = Substitute.For<IHtmlString>();
+            var html = Substitute.For Nancy.ViewEngines.Razor.IHtmlString>();
             var s = Arrange(MessageType.Success);
-            _f.Template.MessageParagraph(Arg.Is<IHtmlString>(h => h.ToHtmlString() == "aerg&amp;%^&quot;esrg&#39;"))
+            _f.Template.MessageParagraph(Arg.Is Nancy.ViewEngines.Razor.IHtmlString>(h => h.ToHtmlString() == "aerg&amp;%^&quot;esrg&#39;"))
                 .Returns(html);
 
             var paragraph = s.Paragraph("aerg&%^\"esrg'");
@@ -74,8 +74,8 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Create_a_paragraph_with_html()
         {
-            var inputHtml = Substitute.For<IHtmlString>();
-            var outputHtml = Substitute.For<IHtmlString>();
+            var inputHtml = Substitute.For Nancy.ViewEngines.Razor.IHtmlString>();
+            var outputHtml = Substitute.For Nancy.ViewEngines.Razor.IHtmlString>();
             var s = Arrange(MessageType.Success);
             _f.Template.MessageParagraph(inputHtml).Returns(outputHtml);
 

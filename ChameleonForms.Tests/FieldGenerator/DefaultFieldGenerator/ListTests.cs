@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using ApprovalTests.Html;
-using ChameleonForms.Component.Config;
-using ChameleonForms.FieldGenerators.Handlers;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.FieldGenerators.Handlers;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
+namespace NancyContrib.Chameleon.Tests.FieldGenerator.DefaultFieldGenerator
 {
     class ListTests : DefaultFieldGeneratorShould
     {

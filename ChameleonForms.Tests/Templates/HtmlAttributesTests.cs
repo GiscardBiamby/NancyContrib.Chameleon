@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Templates;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Templates
+namespace NancyContrib.Chameleon.Tests.Templates
 {
     [TestFixture]
     class HtmlAttributesShould

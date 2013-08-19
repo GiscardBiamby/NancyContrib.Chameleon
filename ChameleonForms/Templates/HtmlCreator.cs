@@ -1,9 +1,10 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using ChameleonForms.Enums;
+using NancyContrib.Chameleon.Enums;
 using Humanizer;
+using Nancy.ViewEngines.Razor;
 
-namespace ChameleonForms.Templates
+namespace NancyContrib.Chameleon.Templates
 {
     /// <summary>
     /// Helper class that creates HTML for a view.
@@ -18,18 +19,18 @@ namespace ChameleonForms.Templates
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the form; specified as an anonymous object</param>
         /// <param name="encType">The encoding type the form uses</param>
         /// <returns>The HTML for the form</returns>
-        public static IHtmlString BuildFormTag(string action, FormMethod method, HtmlAttributes htmlAttributes = null, EncType? encType = null)
+        public static Nancy.ViewEngines.Razor.IHtmlString BuildFormTag(string action, FormMethod method, HtmlAttributes htmlAttributes = null, EncType? encType = null)
         {
             var tagBuilder = new TagBuilder("form");
             if (htmlAttributes != null)
                 tagBuilder.MergeAttributes(htmlAttributes.Attributes);
             tagBuilder.MergeAttribute("action", action);
-            tagBuilder.MergeAttribute("method", HtmlHelper.GetFormMethodString(method), true);
+            tagBuilder.MergeAttribute("method", method.GetFormMethodString(), true);
             if (encType.HasValue)
             {
                 tagBuilder.MergeAttribute("enctype", encType.Humanize());
             }
-            return new HtmlString(tagBuilder.ToString(TagRenderMode.StartTag));
+            return new NonEncodedHtmlString(tagBuilder.ToString(TagRenderMode.StartTag));
         }
 
         /// <summary>
@@ -41,9 +42,9 @@ namespace ChameleonForms.Templates
         /// <param name="id">The id/name to use for the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
-        public static IHtmlString BuildButton(string text, string type = null, string id = null, string value = null, HtmlAttributes htmlAttributes = null)
+        public static Nancy.ViewEngines.Razor.IHtmlString BuildButton(string text, string type = null, string id = null, string value = null, HtmlAttributes htmlAttributes = null)
         {
-            return BuildButton(new HtmlString(HttpUtility.HtmlEncode(text)), type, id, value, htmlAttributes);
+            return BuildButton(new NonEncodedHtmlString(HttpUtility.HtmlEncode(text)), type, id, value, htmlAttributes);
         }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace ChameleonForms.Templates
         /// <param name="id">The id/name to use for the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
-        public static IHtmlString BuildButton(IHtmlString content, string type = null, string id = null, string value = null, HtmlAttributes htmlAttributes = null)
+        public static Nancy.ViewEngines.Razor.IHtmlString BuildButton(Nancy.ViewEngines.Razor.IHtmlString content, string type = null, string id = null, string value = null, HtmlAttributes htmlAttributes = null)
         {
             var t = new TagBuilder("button") {InnerHtml = content.ToHtmlString()};
             if (value != null)
@@ -70,7 +71,7 @@ namespace ChameleonForms.Templates
             if (htmlAttributes != null)
                 t.MergeAttributes(htmlAttributes.Attributes, true);
 
-            return new HtmlString(t.ToString(TagRenderMode.Normal));
+            return new NonEncodedHtmlString(t.ToString(TagRenderMode.Normal));
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace ChameleonForms.Templates
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the checkbox</param>
         /// <param name="value">The value to submit when the checkbox is ticked</param>
         /// <returns>The HTML for the checkbox</returns>
-        public static IHtmlString BuildSingleCheckbox(string name, bool isChecked, HtmlAttributes htmlAttributes, string value = "true")
+        public static Nancy.ViewEngines.Razor.IHtmlString BuildSingleCheckbox(string name, bool isChecked, HtmlAttributes htmlAttributes, string value = "true")
         {
             var t = new TagBuilder("input");
             t.Attributes.Add("value", value);
@@ -94,7 +95,7 @@ namespace ChameleonForms.Templates
             if (htmlAttributes != null)
                 t.MergeAttributes(htmlAttributes.Attributes, false);
 
-            return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
+            return new NonEncodedHtmlString(t.ToString(TagRenderMode.SelfClosing));
         }
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace ChameleonForms.Templates
         /// <param name="type">The type of the input</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the input</returns>
-        public static IHtmlString BuildInput(string name, string value, string type, HtmlAttributes htmlAttributes)
+        public static Nancy.ViewEngines.Razor.IHtmlString BuildInput(string name, string value, string type, HtmlAttributes htmlAttributes)
         {
             var t = new TagBuilder("input");
             t.Attributes.Add("name", name);
@@ -115,7 +116,7 @@ namespace ChameleonForms.Templates
             if (htmlAttributes != null)
                 t.MergeAttributes(htmlAttributes.Attributes, true);
 
-            return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
+            return new NonEncodedHtmlString(t.ToString(TagRenderMode.SelfClosing));
         }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace ChameleonForms.Templates
         /// <param name="labelText">The text inside the label</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the checkbox</param>
         /// <returns>The HTML for the checkbox</returns>
-        public static IHtmlString BuildLabel(string @for, IHtmlString labelText, HtmlAttributes htmlAttributes)
+        public static Nancy.ViewEngines.Razor.IHtmlString BuildLabel(string @for,  Nancy.ViewEngines.Razor.IHtmlString labelText, HtmlAttributes htmlAttributes)
         {
             var t = new TagBuilder("label");
             t.Attributes.Add("for", TagBuilder.CreateSanitizedId(@for));
@@ -134,7 +135,7 @@ namespace ChameleonForms.Templates
             if (htmlAttributes != null)
                 t.MergeAttributes(htmlAttributes.Attributes, false);
 
-            return new HtmlString(t.ToString(TagRenderMode.Normal));
+            return new NonEncodedHtmlString(t.ToString(TagRenderMode.Normal));
         }
     }
 }

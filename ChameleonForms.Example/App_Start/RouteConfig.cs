@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace ChameleonForms.Example
+namespace NancyContrib.Chameleon.Example
 {
     public class RouteConfig
     {

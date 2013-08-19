@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web;
-using System.Web.Mvc.Html;
-using ChameleonForms.Component.Config;
+//using System.Web.Mvc.Html;
+using NancyContrib.Chameleon.Component.Config;
+using Nancy.ViewEngines.Razor;
 
-namespace ChameleonForms.FieldGenerators.Handlers
+namespace NancyContrib.Chameleon.FieldGenerators.Handlers
 {
     internal class TextAreaHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
@@ -16,7 +17,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldGenerator.Metadata.DataTypeName == DataType.MultilineText.ToString();
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override Nancy.ViewEngines.Razor.IHtmlString GenerateFieldHtml()
         {
             return FieldGenerator.HtmlHelper.TextAreaFor(
                 FieldGenerator.FieldProperty,

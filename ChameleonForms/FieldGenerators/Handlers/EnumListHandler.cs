@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
-using ChameleonForms.Component.Config;
+using NancyContrib.Chameleon.Component.Config;
 using Humanizer;
 
-namespace ChameleonForms.FieldGenerators.Handlers
+namespace NancyContrib.Chameleon.FieldGenerators.Handlers
 {
     internal class EnumListHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
@@ -18,7 +18,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return GetUnderlyingType().IsEnum;
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override Nancy.ViewEngines.Razor.IHtmlString GenerateFieldHtml()
         {
             var selectList = GetSelectList();
             return GetSelectListHtml(selectList);

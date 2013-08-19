@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ChameleonForms.Component.Config;
-using ChameleonForms.FieldGenerators.Handlers;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.FieldGenerators.Handlers;
 
-namespace ChameleonForms.FieldGenerators
+namespace NancyContrib.Chameleon.FieldGenerators
 {
     internal static class FieldGeneratorHandlersRouter<TModel, T>
     {
@@ -20,7 +20,7 @@ namespace ChameleonForms.FieldGenerators
             yield return new DefaultHandler<TModel, T>(g, c);
         }
 
-        public static IHtmlString GetFieldHtml(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
+        public static Nancy.ViewEngines.Razor.IHtmlString GetFieldHtml(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
         {
             return GetHandlers(fieldGenerator, fieldConfiguration)
                 .First(h => h.CanHandle())

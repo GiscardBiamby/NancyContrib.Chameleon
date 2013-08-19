@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Enums;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Enums;
 
-namespace ChameleonForms.FieldGenerators.Handlers
+namespace NancyContrib.Chameleon.FieldGenerators.Handlers
 {
     internal class DateTimeHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
@@ -16,7 +16,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return GetUnderlyingType() == typeof (DateTime);
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override Nancy.ViewEngines.Razor.IHtmlString GenerateFieldHtml()
         {
             return GetInputHtml(TextInputType.Text);
         }

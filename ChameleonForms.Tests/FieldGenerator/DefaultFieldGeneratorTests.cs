@@ -5,14 +5,15 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Reporters;
-using ChameleonForms.Attributes;
-using ChameleonForms.Component.Config;
-using ChameleonForms.FieldGenerators;
-using ChameleonForms.Tests.Helpers;
+using NancyContrib.Chameleon.Attributes;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.FieldGenerators;
+using NancyContrib.Chameleon.Tests.Helpers;
 using NUnit.Framework;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
+using Nancy.ViewEngines.Razor;
 
-namespace ChameleonForms.Tests.FieldGenerator
+namespace NancyContrib.Chameleon.Tests.FieldGenerator
 {
     public enum TestEnum
     {
@@ -130,14 +131,14 @@ namespace ChameleonForms.Tests.FieldGenerator
     [UseReporter(typeof(DiffReporter))]
     abstract class DefaultFieldGeneratorShould
     {
-        protected HtmlHelper<TestFieldViewModel> H;
+        protected HtmlHelpers<TestFieldViewModel> H;
         protected IFieldConfiguration ExampleFieldConfiguration;
 
         [SetUp]
         public void Setup()
         {
             var autoSubstitute = AutoSubstituteContainer.Create();
-            H = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            H = autoSubstitute.Resolve<HtmlHelpers<TestFieldViewModel>>();
             ExampleFieldConfiguration = new FieldConfiguration().Attr("data-attr", "value");
         }
 

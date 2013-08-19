@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web;
-using ChameleonForms.Component.Config;
-using ChameleonForms.FieldGenerators;
-using ChameleonForms.Templates;
+using Nancy.ViewEngines.Razor;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.FieldGenerators;
+using NancyContrib.Chameleon.Templates;
 
-namespace ChameleonForms.Component
+namespace NancyContrib.Chameleon.Component
 {
     /// <summary>
     /// Helper for field configuration.
@@ -50,7 +51,7 @@ namespace ChameleonForms.Component
             Initialise();
         }
         
-        public override IHtmlString Begin()
+        public override Nancy.ViewEngines.Razor.IHtmlString Begin()
         {
             var isValid = Form.HtmlHelper.ViewData.ModelState.IsValidField(_fieldGenerator.GetFieldId());
             var readonlyConfig = _fieldGenerator.PrepareFieldConfiguration(_config);
@@ -59,10 +60,10 @@ namespace ChameleonForms.Component
                 : Form.Template.BeginField(_fieldGenerator.GetLabelHtml(readonlyConfig), _fieldGenerator.GetFieldHtml(readonlyConfig), _fieldGenerator.GetValidationHtml(readonlyConfig), _fieldGenerator.Metadata, readonlyConfig, isValid);
         }
 
-        public override IHtmlString End()
+        public override Nancy.ViewEngines.Razor.IHtmlString End()
         {
             return !IsParent
-                ? new HtmlString(string.Empty)
+                ? new NonEncodedHtmlString(string.Empty)
                 : Form.Template.EndField();
         }
     }

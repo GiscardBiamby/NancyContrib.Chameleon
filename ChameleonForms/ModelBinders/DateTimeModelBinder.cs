@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Web.Mvc;
 
-namespace ChameleonForms.ModelBinders
+namespace NancyContrib.Chameleon.ModelBinders
 {
     /// <summary>
     /// Binds a datetime in a model using the display format string.

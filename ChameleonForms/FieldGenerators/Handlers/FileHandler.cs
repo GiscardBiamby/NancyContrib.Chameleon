@@ -1,8 +1,8 @@
 ﻿using System.Web;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Enums;
+using NancyContrib.Chameleon.Component.Config;
+using NancyContrib.Chameleon.Enums;
 
-namespace ChameleonForms.FieldGenerators.Handlers
+namespace NancyContrib.Chameleon.FieldGenerators.Handlers
 {
     internal class FileHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
@@ -15,7 +15,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return typeof(HttpPostedFileBase).IsAssignableFrom(FieldGenerator.Metadata.ModelType);
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override Nancy.ViewEngines.Razor.IHtmlString GenerateFieldHtml()
         {
             return GetInputHtml(TextInputType.File);
         }

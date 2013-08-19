@@ -1,7 +1,7 @@
 ﻿using System.Web;
-using ChameleonForms.Templates;
+using NancyContrib.Chameleon.Templates;
 
-namespace ChameleonForms.Component
+namespace NancyContrib.Chameleon.Component
 {
     /// <summary>
     /// Wraps the output of the navigation area of a form.
@@ -20,12 +20,12 @@ namespace ChameleonForms.Component
             Initialise();
         }
 
-        public override IHtmlString Begin()
+        public override Nancy.ViewEngines.Razor.IHtmlString Begin()
         {
             return Form.Template.BeginNavigation();
         }
 
-        public override IHtmlString End()
+        public override Nancy.ViewEngines.Razor.IHtmlString End()
         {
             return Form.Template.EndNavigation();
         }
@@ -36,7 +36,7 @@ namespace ChameleonForms.Component
         /// <param name="text">The text to display in the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
-        public IHtmlString Submit(string text, HtmlAttributes htmlAttributes = null)
+        public Nancy.ViewEngines.Razor.IHtmlString Submit(string text, HtmlAttributes htmlAttributes = null)
         {
             return HtmlCreator.BuildButton(text, "submit", htmlAttributes: htmlAttributes);
         }
@@ -47,7 +47,7 @@ namespace ChameleonForms.Component
         /// <param name="content">The content to display in the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
-        public IHtmlString Submit(IHtmlString content, HtmlAttributes htmlAttributes = null)
+        public Nancy.ViewEngines.Razor.IHtmlString Submit(Nancy.ViewEngines.Razor.IHtmlString content, HtmlAttributes htmlAttributes = null)
         {
             return HtmlCreator.BuildButton(content, "submit", htmlAttributes: htmlAttributes);
         }
@@ -64,7 +64,7 @@ namespace ChameleonForms.Component
         /// <param name="buttonText">If you want to use a &lt;button&gt; rather than &lt;input&gt; then specify this to set the text the user sees</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
-        public IHtmlString Submit(string name, string value, IHtmlString buttonText = null, HtmlAttributes htmlAttributes = null)
+        public Nancy.ViewEngines.Razor.IHtmlString Submit(string name, string value,  Nancy.ViewEngines.Razor.IHtmlString buttonText = null, HtmlAttributes htmlAttributes = null)
         {
             if (buttonText != null)
                 return HtmlCreator.BuildButton(buttonText, "submit", name, value, htmlAttributes);
@@ -78,7 +78,7 @@ namespace ChameleonForms.Component
         /// <param name="text">The text to display in the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the button</returns>
-        public IHtmlString Button(string text, HtmlAttributes htmlAttributes = null)
+        public Nancy.ViewEngines.Razor.IHtmlString Button(string text, HtmlAttributes htmlAttributes = null)
         {
             return HtmlCreator.BuildButton(text, htmlAttributes: htmlAttributes);
         }
@@ -89,7 +89,7 @@ namespace ChameleonForms.Component
         /// <param name="content">The content to display in the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the button</returns>
-        public IHtmlString Button(IHtmlString content, HtmlAttributes htmlAttributes = null)
+        public Nancy.ViewEngines.Razor.IHtmlString Button(Nancy.ViewEngines.Razor.IHtmlString content, HtmlAttributes htmlAttributes = null)
         {
             return HtmlCreator.BuildButton(content, htmlAttributes: htmlAttributes);
         }
@@ -100,7 +100,7 @@ namespace ChameleonForms.Component
         /// <param name="content">The content to display for the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the reset button</returns>
-        public IHtmlString Reset(IHtmlString content, HtmlAttributes htmlAttributes = null)
+        public Nancy.ViewEngines.Razor.IHtmlString Reset(Nancy.ViewEngines.Razor.IHtmlString content, HtmlAttributes htmlAttributes = null)
         {
             return HtmlCreator.BuildButton(content, "reset", htmlAttributes: htmlAttributes);
         }
@@ -111,7 +111,7 @@ namespace ChameleonForms.Component
         /// <param name="text">The text to display for the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the reset button</returns>
-        public IHtmlString Reset(string text, HtmlAttributes htmlAttributes = null)
+        public Nancy.ViewEngines.Razor.IHtmlString Reset(string text, HtmlAttributes htmlAttributes = null)
         {
             return HtmlCreator.BuildButton(text, "reset", htmlAttributes: htmlAttributes);
         }

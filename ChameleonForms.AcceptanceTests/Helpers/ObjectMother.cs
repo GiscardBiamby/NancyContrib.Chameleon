@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ChameleonForms.Example.Controllers;
+using NancyContrib.Chameleon.Example.Controllers;
 
-namespace ChameleonForms.AcceptanceTests.Helpers
+namespace NancyContrib.Chameleon.AcceptanceTests.Helpers
 {
     public static class ObjectMother
     {

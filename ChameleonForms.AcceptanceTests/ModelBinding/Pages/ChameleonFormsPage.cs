@@ -3,13 +3,13 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-using ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields;
+using NancyContrib.Chameleon.AcceptanceTests.ModelBinding.Pages.Fields;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using TestStack.Seleno.PageObjects;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
+namespace NancyContrib.Chameleon.AcceptanceTests.ModelBinding.Pages
 {
     public abstract class ChameleonFormsPage<T> : Page<T> where T : class, new()
     {
